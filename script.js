@@ -128,3 +128,53 @@
     }, 2300);
   });
 })();
+
+
+/*  BACKGROUND MUSIC  */
+const weddingMusic = document.getElementById("weddingMusic"); 
+const musicButton = document.getElementById("musicButton");
+
+let musicPlaying = false;
+
+/* START MUSIC AFTER FIRST TOUCH */
+function startMusic() {
+  if (musicPlaying) return;
+
+  weddingMusic.play()
+  .then(() => {
+    musicPlaying = true;
+    musicButton.textContent = "♫";
+  })
+  .catch(() => {
+    // Browser blocked playback
+  });
+}
+
+
+/* FIRST INTERACTION ANYWHERE */
+document.addEventListener("click", startMusic, { once: true });
+
+/* MUSIC BUTTON */
+musicButton.addEventListener("click", function (event) {
+event.stopPropagation();
+
+if (musicPlaying) {
+
+    weddingMusic.pause();
+
+    musicPlaying = false;
+
+
+} 
+else {
+
+    weddingMusic.play()
+        .then(() => {
+
+            musicPlaying = true;
+
+        });
+
+}
+});
+
